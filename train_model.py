@@ -15,12 +15,12 @@ DATA_PATH = os.path.join("data", "creditcard.csv")
 df = pd.read_csv(DATA_PATH)
 
 # Select features
-features = ['Time', 'Amount', 'V1', 'V2', 'V3', 'V4']
-X = df[features]
-y = df['Class']
+features = ['Time', 'Amount', 'V1', 'V2', 'V3', 'V4']  # Adjust based on your dataset
+X = df[features] # Features
+y = df['Class'] # Target variable (fraud or not)
 
 # Train/test split
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, stratify=y)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, stratify=y) # Ensure stratified split
 
 # Train model
 model = RandomForestClassifier(n_estimators=100, class_weight='balanced')
