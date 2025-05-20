@@ -40,3 +40,9 @@ async def predict(transaction: Transaction):
         "fraud": bool(prediction[0]),
         "probability": probability
     }
+
+
+#use uvicorn to run the app
+# To run the app, use the command:  
+# uvicorn api.app:app --reload
+# This will start the FastAPI server and you can access the API at http://
