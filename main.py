@@ -1,3 +1,5 @@
+# This is a simple FastAPI application that serves a machine learning model for fraud detection.
+# It includes an endpoint to receive transaction data and return predictions.
 from fastapi import FastAPI
 from pydantic import BaseModel
 import joblib
