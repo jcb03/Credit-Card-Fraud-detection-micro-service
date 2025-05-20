@@ -6,6 +6,8 @@ import numpy as np
 app = FastAPI()
 model = joblib.load('model.joblib')
 
+# Define the input data model
+# This model should match the features used in training
 class Transaction(BaseModel):
     time: float
     amount: float
@@ -14,6 +16,7 @@ class Transaction(BaseModel):
     v3: float
     v4: float
 
+# Define the root endpoint
 @app.post("/predict")
 async def predict(transaction: Transaction):
     features = [
