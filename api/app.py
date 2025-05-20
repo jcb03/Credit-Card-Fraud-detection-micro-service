@@ -1,15 +1,17 @@
-# This is a simple FastAPI application that serves a machine learning model for fraud detection.
-# It includes an endpoint to receive transaction data and return predictions.
+# api/app.py
 from fastapi import FastAPI
 from pydantic import BaseModel
 import joblib
 import numpy as np
+import os
 
 app = FastAPI()
-model = joblib.load('model.joblib')
+
+# Robust model path handling
+MODEL_PATH = os.path.join(os.path.dirname(__file__), "model.joblib")
+model = joblib.load(MODEL_PATH)
 
 # Define the input data model
-# This model should match the features used in training
 class Transaction(BaseModel):
     time: float
     amount: float
@@ -18,7 +20,10 @@ class Transaction(BaseModel):
     v3: float
     v4: float
 
-# Define the root endpoint
+@app.get("/")
+def read_root():
+    return {"status": "API is up and running!"}
+
 @app.post("/predict")
 async def predict(transaction: Transaction):
     features = [
@@ -30,4 +35,8 @@ async def predict(transaction: Transaction):
         transaction.v4
     ]
     prediction = model.predict([features])
-    return {"fraud": bool(prediction[0]), "probability": float(model.predict_proba([features])[0][1])}
+    probability = float(model.predict_proba([features])[0][1])
+    return {
+        "fraud": bool(prediction[0]),
+        "probability": probability
+    }
