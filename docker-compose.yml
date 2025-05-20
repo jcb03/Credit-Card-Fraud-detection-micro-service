@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  api:
+    build: ./api
+    container_name: fastapi-service
+    ports:
+      - "8000:8000"
+    restart: always
+
+  streamlit:
+    build: ./streamlit-app
+    container_name: streamlit-frontend
+    ports:
+      - "8501:8501"
+    depends_on:
+      - api
+    environment:
+      - API_URL=http://api:8000/predict
