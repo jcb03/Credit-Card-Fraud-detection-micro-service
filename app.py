@@ -1,7 +1,10 @@
+# This is a simple FastAPI application that serves a machine learning model for fraud detection.
+# It includes an endpoint to receive transaction data and return predictions.
 import streamlit as st
 import requests
 import pandas as pd
 
+# This is a simple Streamlit application that serves as a frontend for the fraud detection model.
 API_URL = "http://api:8000/predict"
 
 st.title("Personal Finance Manager with Fraud Detection")
