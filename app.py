@@ -7,6 +7,8 @@ import pandas as pd
 # This is a simple Streamlit application that serves as a frontend for the fraud detection model.
 API_URL = "http://api:8000/predict"
 
+# Load the dataset for display
+df = pd.read_csv("creditcard.csv")
 st.title("Personal Finance Manager with Fraud Detection")
 
 with st.form("transaction_form"):
